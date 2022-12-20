@@ -4,7 +4,10 @@ $(function () {
     log("Requesting Access Token...");
     // Using a relative link to access the Voice Token function
     // Making api call
-    $.getJSON("./token")
+    fetch("./token")
+        .then(function(data){
+            return data.json()
+        })
         .then(function (data) {
             log("Got a token.");
             console.log("Token: " + data.token);
@@ -73,7 +76,7 @@ $(function () {
         });
 
     // Bind button to make call
-    $("#btnDial").bind("click", function () {
+    $("#btnDial").bind("click", async function () {
         $("#modal-dial").modal("hide");
 
         // get the phone number to connect the call to
@@ -90,11 +93,6 @@ $(function () {
             outgoingConnection.on("ringing", function () {
                 log("Ringing...");
             });
-            outgoingConnection.on("messageReceived", (message) => {
-                console.log(JSON.stringify(message.content));
-                //the voiceEventSid can be used for tracking the message
-                console.log('voiceEventSid: ', message.voiceEventSid);
-              })
         }
     });
 

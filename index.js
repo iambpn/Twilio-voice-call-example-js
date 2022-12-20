@@ -81,17 +81,6 @@ app.get("/callback-status", (req, res) => {
   console.log("Params:", JSON.stringify(req.params));
   console.log("Query:", JSON.stringify(req.query));
 
-  setTimeout(() => {
-    twilioClient
-      .calls(req.query.ParentCallSid)
-      .userDefinedMessages.create({
-        content: JSON.stringify({
-          key1: "Hello from the server side.",
-        }),
-      })
-      .then((user_defined_message) => console.log(user_defined_message.sid));
-  }, 5000);
-
   return res.send("<response></response>");
 });
 
