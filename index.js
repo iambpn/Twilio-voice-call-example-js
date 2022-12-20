@@ -190,7 +190,6 @@ app.get("/getEvents", (req, res) => {
     return;
   } else {
     eventsByNumber[key] = [];
-    console.log("\n Key not found in eventsByNumber.", key);
   }
 
   responses[key] = res;
