@@ -68,14 +68,7 @@ app.get("/handle-calls", twilio.webhook({ validate: false }), (req, res) => {
   } else {
     console.log("Inbound Call");
     let caller = req.query.To;
-    dial.number(
-      {
-        statusCallbackEvent: "initiated, ringing, answered, completed",
-        statusCallback: "/callback-status",
-        statusCallbackMethod: "GET",
-      },
-      caller
-    );
+    // .client is for dialing or transferring call to registered identity.
     dial.client(config.twilio_number);
   }
   console.log("Response Body:", twiml.toString());
@@ -195,6 +188,6 @@ app.get("/getEvents", (req, res) => {
   responses[key] = res;
 });
 
-app.listen(3000, () => {
-  console.log("listening on port 3000");
+app.listen(8000, () => {
+  console.log("listening on port 8000");
 });
