@@ -1,6 +1,8 @@
 $(function () {
   var device;
   var sse;
+  var from_number = "+19049064208";
+  var to_number = document.getElementById("phoneNumber").value;
 
   log("Requesting Access Token...");
   // Using a relative link to access the Voice Token function
@@ -83,7 +85,9 @@ $(function () {
 
     // get the phone number to connect the call to
     var params = {
-      To: document.getElementById("phoneNumber").value,
+      From: from_number,
+      To: to_number,
+      // you can add additional data to sent to backend here
     };
 
     // output destination number
@@ -112,7 +116,7 @@ $(function () {
 
   // SSE - Server Sent Event
   function initiateSSE() {
-    sse = new EventSource("/getEvents?to=+9779861248030&from=+19049064208");
+    sse = new EventSource(`/getEvents?to=${to_number}&from=${from_number}`);
     sse.addEventListener("message", function (event) {
       console.log("message", event);
       const data = JSON.parse(event.data);
