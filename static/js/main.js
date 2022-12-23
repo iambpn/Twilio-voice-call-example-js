@@ -2,7 +2,7 @@ $(function () {
   var device;
   var sse;
   var from_number = "+19049064208";
-  var to_number = document.getElementById("phoneNumber").value;
+  var to_number;
 
   log("Requesting Access Token...");
   // Using a relative link to access the Voice Token function
@@ -82,7 +82,7 @@ $(function () {
   // Bind button to make call
   $("#btnDial").bind("click", async function () {
     $("#modal-dial").modal("hide");
-
+    to_number = document.getElementById("phoneNumber").value;
     // get the phone number to connect the call to
     var params = {
       From: from_number,
