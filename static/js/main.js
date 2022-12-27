@@ -40,6 +40,7 @@ $(function () {
 
       device.on("error", function (error) {
         log("Twilio.Device Error: " + error.message);
+        sse && sse.close();
       });
 
       device.on("connect", function (conn) {
@@ -49,7 +50,7 @@ $(function () {
 
       device.on("disconnect", function (conn) {
         log("Call ended.");
-        sse.close();
+        sse && sse.close();
         $(".modal").modal("hide");
       });
 
@@ -77,6 +78,7 @@ $(function () {
     .catch(function (err) {
       console.log(err);
       log("Could not get a token from server!");
+      sse && sse.close();
     });
 
   // Bind button to make call
@@ -98,9 +100,8 @@ $(function () {
       var outgoingConnection = device.connect(params);
       outgoingConnection.on("ringing", function () {
         log("Ringing...");
+        initiateSSE();
       });
-
-      initiateSSE();
     }
   });
 
@@ -119,8 +120,7 @@ $(function () {
     sse = new EventSource(`/getEvents?to=${to_number}&from=${from_number}`);
     sse.addEventListener("message", function (event) {
       console.log("message", event);
-      const data = JSON.parse(event.data);
-      log(`server-side event: ${data[data.length - 1]}`);
+      log(`server-side event: ${event.data}`);
     });
 
     sse.addEventListener("closed", (event) => {
