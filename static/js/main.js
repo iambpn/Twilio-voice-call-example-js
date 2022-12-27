@@ -138,20 +138,17 @@ $(function () {
 
     sse.addEventListener("message", function (event) {
       console.log("message", event);
-      const data = JSON.parse(event.data);
-      log(`server-side event: ${data[data.length - 1]}`);
+      log(`server-side event: ${event.data}`);
     });
 
     sse.addEventListener("onStatusUpdate", function (event) {
       console.log("message", event);
-      const data = JSON.parse(event.data);
-      log(`server-side event: ${data}`);
+      log(`server-side event: ${event.data}`);
     });
 
     sse.addEventListener("onInitialStatus", function (event) {
       console.log("message", event);
-      const data = JSON.parse(event.data);
-      log(`Initial server-side event: ${data}`);
+      log(`Initial server-side event: ${event.data}`);
     });
 
     sse.addEventListener("closed", (event) => {
