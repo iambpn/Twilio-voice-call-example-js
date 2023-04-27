@@ -12,7 +12,7 @@ Resource: https://www.twilio.com/blog/make-receive-phone-calls-browser-twilio-pr
 - [Js SDK 2.0](https://www.twilio.com/docs/voice/sdks/javascript)
 - [Handling no answer/ voicemail](https://www.twilio.com/blog/handle-no-answer-scenarios-voicemail-callback)
 
-# Setting up Phone number and Twilio console configs
+## Setting up Phone number and Twilio console configs
 
 - Create a `Twiml App`:
 
